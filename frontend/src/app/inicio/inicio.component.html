@@ -1,0 +1,567 @@
+<div class="container-fluid bg-fundo b-0 m-0 p-0">
+
+    <!--MENU-->
+    <nav class="navbar navbar-expand-lg navbar-light pt-4" id="inicio">
+
+        <!-- botão responsável por deixar os ícones do menu responsivos -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
+            aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Icon marca -->
+        <a class="navbar-brand mg-icon" href="#proposito" id="entrar">
+            <img src="assets/img/favicon-white.png" alt="Freegunity" class="img-fluid icon-animation">
+        </a>
+
+        <div class="collapse navbar-collapse justify-content-end " id="conteudoNavbarSuportado">
+            <!-- botão Entre -->
+            <button id="btnLogin" type="button" class="btn btnMenu btn-animation" data-toggle="modal"
+                data-target="#modalEntrar">
+                Entre
+            </button>
+            <!-- botão Cadastre-se -->
+            <button type="button" class="btn border-light btnMenu shadow-sm btn-animation" data-toggle="modal"
+                data-target="#modalCadastrar">
+                Cadastre-se
+            </button>
+        </div>
+
+    </nav>
+    <!--/MENU-->
+
+    <!-- MODAIS -->
+
+    <!-- Entrar -->
+    <div class="modal fade" id="modalEntrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content formato">
+                <div class="modal-header d-flex justify-content-center">
+                    <img src="../../assets/img/favicon.png" width="30px" height="30px">
+                    <h3 class="modal-title ml-auto fs-title text-secondary" id="exampleModalLabel">Seja bem-vinde!</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="mt-2" action="" method="post" name="login">
+                        <div class="form-group">
+                            <input [(ngModel)]='userLogin.username' type="text" name="username" class="form-control"
+                                id="username" required #loginUsername="ngModel" placeholder="Usuário">
+                            <!-- Alerta de preenchimento do formulario -->
+                            <div *ngIf="loginUsername.invalid && (loginUsername.dirty || loginUsername.touched)"
+                                class="alert">
+                                <small class="text-danger" *ngIf="loginUsername.errors?.required">
+                                    O campo "Usuário" é obrigatório.
+                                </small>
+                            </div>
+                            <!-- /Alerta de preenchimento do formulario -->
+                        </div>
+                        <div class="form-group">
+                            <input [(ngModel)]='userLogin.senha' type="password" name="loginSenha" id="loginSenha"
+                                class="form-control" required #loginSenha="ngModel" placeholder="Senha">
+                            <!-- Alerta de preenchimento do formulario -->
+                            <div *ngIf="loginSenha.invalid && (loginSenha.dirty || loginSenha.touched)" class="alert">
+                                <small class="text-danger" *ngIf="loginSenha.errors?.required">
+                                    O campo "Senha" é obrigatório.
+                                </small>
+                            </div>
+                            <!-- /Alerta de preenchimento do formulario -->
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="col">
+                        <div class="row d-flex align-items-center">
+                            <div class="col-md-auto">
+                                <a data-toggle="modal" data-dismiss="modal" data-target="#modalCadastrar"
+                                    class="text-center cc">
+                                    Criar conta
+                                </a>
+                            </div>
+                            <div class="col-md-4 ml-auto">
+                                <button (click)='entrar()' type="submit" class="btn btn-primary" id="btn-entrar"
+                                    data-dismiss="modal">Entrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Entrar -->
+
+    <!-- Cadastrar -->
+    <div class="modal fade" id="modalCadastrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content formato">
+                <div class="modal-header">
+                    <img src="../../assets/img/favicon.png" width="30px" height="30px">
+                    <h3 class="modal-title ml-auto fs-title text-secondary" id="exampleModalLabel">Inscreva-se</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form class="mt-2" action="" method="post" name="login">
+                        <div class="form-group">
+                            <input [(ngModel)]='user.nome' type="text" name="cadSenha" id="cadSenha"
+                                class="form-control" required #nome="ngModel" placeholder="Nome completo">
+                            <!-- Alerta de preenchimento do formulario -->
+                            <div *ngIf="nome.invalid && (nome.dirty || nome.touched)" class="alert">
+                                <small class="text-danger" *ngIf="nome.errors?.required">
+                                    O campo "Nome" é obrigatório.
+                                </small>
+                            </div>
+                            <!-- /Alerta de preenchimento do formulario -->
+                        </div>
+                        <div class="form-group">
+                            <input [(ngModel)]='user.username' type="text" name="cadUsername" class="form-control"
+                                id="cadUsername" required #username="ngModel" placeholder="Usuário">
+                            <!-- Alerta de preenchimento do formulario -->
+                            <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert">
+                                <small class="text-danger" *ngIf="username.errors?.required">
+                                    O campo "Usuário" é obrigatório.
+                                </small>
+                            </div>
+                            <!-- /Alerta de preenchimento do formulario -->
+                        </div>
+                        <div class="form-group">
+                            <input [(ngModel)]='user.email' type="email" name="email" id="email" class="form-control"
+                                required #email="ngModel" placeholder="Email">
+                            <!-- Alerta de preenchimento do formulario -->
+                            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
+                                <small class="text-danger" *ngIf="email.errors?.required">
+                                    Campo "Email" é obrigatório.
+                                </small>
+                            </div>
+                            <!-- /Alerta de preenchimento do formulario -->
+                        </div>
+                        <div class="form-group">
+                            <input [(ngModel)]='user.senha' (input)='tipoUser($event)' type="password" name="senha"
+                                id="senha" class="form-control" required #senha="ngModel" placeholder="Senha">
+                            <!-- Alerta de preenchimento do formulario -->
+                            <div *ngIf="senha.invalid && (senha.dirty || senha.touched)" class="alert">
+                                <small class="text-danger" *ngIf="senha.errors?.required">
+                                    O campo "Senha" é obrigatório.
+                                </small>
+                            </div>
+                            <!-- /Alerta de preenchimento do formulario -->
+                        </div>
+                        <div class="form-group">
+                            <input (input)='confirmaSenha($event)' type="password" name="ConfSenha" id="ConfSenha"
+                                class="form-control" placeholder="Confirmar senha">
+                        </div>
+                    </form>
+                </div>
+                <div class="d-none">
+                    <input [(ngModel)]='user.foto' type="password" name="foto" id="foto" class="form-control"
+                        placeholder="Confirmar senha">
+                </div>
+                <div class="modal-footer">
+                    <div class="col">
+                        <div class="row d-flex align-items-center">
+                            <div class="col-md-auto ml-auto">
+                                <button (click)='cadastrar()' type="submit" class="btn btn-primary" id="btn-cadastrar"
+                                    data-dismiss="modal">Confirmar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- /Cadastrar -->
+    <!-- /MODAIS -->
+
+    <div class="container-fluid d-flex justify-content-center p-0">
+        <div class="row d-flex justify-content-end mx-3 my-5 py-2">
+
+            <div class="col-md-6">
+                <div class="row">
+                    <!-- pergunta -->
+                    <div class="col-md-10 align-items-end">
+                        <h1 class="ft-pergunta mb-5">O que VOCÊ faz quando se depara com um alimento que passou da
+                            validade ou tem uma aparência ruim?</h1>
+                    </div>
+                    <!-- /pergunta -->
+                </div>
+                <div class="row">
+                    <!-- botão visitante -->
+                    <div class="mt-5">
+                        <a class="btn btnVisit btn-animation border-light shadow-sm" href="#" role="button"
+                            (click)='entrarVisitante()'>Entre
+                            como visitante</a>
+                    </div>
+                    <!-- /Botão visitante -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid p-0 m-0">
+    <!-- SIGNIFICADO FREEGAN -->
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-md-12 p-0 m-0">
+            <div class="row d-flex justify-content-center m-0 ">
+                <div class="col-md-9 my-5 d-flex justify-content-center">
+                    <hr class="barra mx-3">
+                    <h3 class="font-weight-light">Você conhece o Freeganismo?</h3>
+                    <hr class="barra mx-3">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid p-0 d-flex justify-content-center">
+        <div class="row d-flex justify-content-center m-0">
+            <div class="col-md-10">
+                <div class="row align-items-center d-flex justify-content-center">
+                    <div class="col-md-5 d-flex justify-content-end">
+                        <p class="ft-titSig">free + (ve)ganismo</p>
+                    </div>
+
+                    <div class="col-md-4 d-flex justify-content-start">
+                        <p class="ft-subSig">(portmanteau livre vegano) Subs.</p>
+                    </div>
+
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-10 d-flex justify-content-center">
+                        <p class="ft-txtSig">
+                            É uma forma de viver em que as pessoas não
+                            compram nada ou só compram o mínimo possível, rejeitam o consumismo e procuram
+                            preservar
+                            o
+                            meio ambiente, gerando o mínimo de lixo possível. Elas se abastecem dos
+                            alimentos que as feiras de rua e mercados descartam por não estarem bonitos
+                            para venda.</p>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /SIGNIFICADO FREEGAN -->
+
+<!-- REALIDADE -->
+<div class="container-fluid bg-lixo mt-5 d-flex justify-content-center">
+    <div class="row align-items-center m-0">
+
+        <div class="col-md-6 p-0">
+            <div class="d-flex justify-content-end">
+                <div class="col-md-7 p-0">
+                    <h5 class="font-weight-light txt-objetivo m-0">
+                        De acordo com o Índice de Desperdício de Alimentos 2021, em média, o Brasil
+                        desperdiça
+                        60 quilos
+                        de
+                        alimento por pessoa, anualmente.
+                        O desperdício de alimentos ocorre desde o momento da colheita até o fim da refeição,
+                        quando
+                        restos
+                        de comida são jogados no lixo.</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5 p-0 d-flex justify-content-center">
+            <div class="col-md-6 p-0">
+                <p class="txt-titObjetivo m-0 font-weight-bold">
+                    Juntos vamos mudar essa realidade!</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- /REALIDADE -->
+
+<!-- Divisória -->
+<div class="row d-flex justify-content-center m-0 ">
+    <div class="col-md-9 my-5 d-flex justify-content-center">
+        <hr class="barra mx-3">
+        <h3 class="font-weight-light">Confira algumas dicas</h3>
+        <hr class="barra mx-3">
+    </div>
+</div>
+<!-- /Divisória -->
+
+<!-- DICAS -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="7"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="8"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="../../assets/img/geladeira.png" alt="Primeiro Slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h2 class="font-italic">Faça uma lista antes da compra</h2>
+                            <h5>▫ Verifique a geladeira e a dispensa<br>▫ Evite estoques para que nada estrague</h5>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="../../assets/img/validade.png" alt="Segundo Slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h2 class="font-italic">Validade</h2>
+                            <h5>▫ Na hora de cozinhar, dê preferência aos alimentos próximo da data de vencimento<br>▫
+                                Anote numa lista e cole na geladeira para não esquecer</h5>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="../../assets/img/periodicidade.png" alt="Terceiro Slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h2 class="font-italic">Periodicidade</h2>
+                            <h5>▫ Em vez de fazer uma compra do mês, faça mais vezes<br>▫
+                                Compre menos produtos</h5>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="../../assets/img/promocoes.png" alt="Terceiro Slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h2 class="font-italic">Promoções</h2>
+                            <h5>▫ Não exagere na compra só porque o preço está bom</h5>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="../../assets/img/aproveitamento.png" alt="Terceiro Slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h2 class="font-italic">Aproveitamento</h2>
+                            <h5>▫ Aproveite seus alimentos até o talo<br>▫
+                                É possível reaproveitar partes não convencionais, como cascas por exemplo</h5>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="../../assets/img/aparencia.png" alt="Terceiro Slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h2 class="font-italic">Aparência</h2>
+                            <h5>▫ Se algum legume, por exemplo, apresentar uma parte feia, corte-as, e use a que
+                                sobrou<br>▫
+                                Você não precisa jogar tudo fora</h5>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="../../assets/img/embalagem.png" alt="Terceiro Slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h2 class="font-italic">Frutas,verguras e legumes</h2>
+                            <h5>▫ Antes de guardar na geladeira, higienize-os e seque-os<br>▫
+                                Depois de consumir, guarde em embalagens muito bem fechadas, evitando a proliferação de
+                                microorganismos</h5>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="../../assets/img/consumo.png" alt="Terceiro Slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h2 class="font-italic">Leite, queijos e carnes</h2>
+                            <h5>▫ Leite longa vida, dura em média 4 dias na geladeira, enquanto os leites pasteurizados
+                                devem ser consumidos em até 1 dia<br>▫
+                                Queijos como o minas e o ricota duram mais ou menos 5 dias, enquanto os mais duros,
+                                duram mais tempo
+                                ▫ Carnes, congele-as se não for consumir após a compra</h5>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="../../assets/img/compostagem.png" alt="Terceiro Slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h2 class="font-italic">Compostagem doméstica</h2>
+                            <h5>▫ Recicle alimentos orgânicos que não vai consumir usando como adubo<br>▫
+                                Isso evita gastos ambientais e financeiros no transporte de resíduos, e diminui a
+                                emissão de gás metano</h5>
+                        </div>
+                    </div>
+
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Próximo</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /DICAS -->
+
+<!-- SOBRE NÓS -->
+<div class="container-fluid d-flex justify-content-center p-0" id="proposito">
+    <div class="row mt-5 m-0 d-flex justify-content-center bg-sobre">
+        <div class="col-md-12 p-0 m-0 d-flex justify-content-center">
+            <div class="row p-0 m-0 d-flex justify-content-center">
+                <div class="col-md-8 mb-5 m-0">
+                    <div class="text-justify">
+                        <p class="text-center ft-titSobre pt-5">Nosso manifesto</p>
+
+                        <p class="txtSobre lead font-weight-normal">
+                            A Freegunity deseja conectar a comunidade freegan e pessoas das mais variadas
+                            etnias,
+                            classes e idades que estão
+                            cansadas do consumo inconsciente de alimentos que são
+                            desperdiçados
+                            todos os dias, e que se consumidas de forma correta, podem sim erradicar o impacto
+                            negativo da fome no mundo.
+                            <br>Uma rede-social criada a fim de garantir o Desenvolvimento Sustentável da humanidade,
+                            colaborando
+                            com o Objeto II da Agenda 2030 da ONU no Brasil – <a
+                                href="https://brasil.un.org/pt-br/sdgs/2" target="_blank">FOME ZERO E
+                                AGRICULTURA
+                                SUSTENTÁVEL</a>.
+                            Acreditamos que o mundo se mova em função da consciência de cada um. Por isso são
+                            permitidos
+                            quaisquer conteúdos que contribuam com a causa acima.
+                        </p>
+                    </div>
+                    <a href="#entrar" class="d-flex justify-content-center">
+                        <img src="assets/img/favicon.png" width="40px" height="40px" alt="Freegunity"
+                            class="img-fluid icon-animation">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /SOBRE NÓS -->
+
+<!--DEV TEAM SPACE -->
+<div class="container-fluid tm d-flex justify-content-center b-0 p-0 pb-5">
+    <div class="row">
+        <div class="col-md alend">
+            <div class="card media">
+                <div class="icon">
+                    <img src="../assets/img/thi.png" width="100px">
+                </div>
+                <div class="content">
+                    <h2>Thiago da Silva Machado</h2>
+                    <h5 class="text-white">Desenvolvedor Fullstack</h5>
+                    <p class="text-white">Atuei no Front-End da Freegunity, gosto de maratonar série e pedir pizza as sextas-feiras
+                    </p>
+                    <a href="https://www.linkedin.com/in/thiago-machado-473712207/" target="_blank"><img src="../../assets/img/linkedin.png" width="25px" alt="Linkedin" class="redeSocial"></a>
+                    <a href="https://github.com/thiagomachadoo" target="_blank"><img src="../../assets/img/github.png" width="25px" alt="Github" class="redeSocial"></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md alend">
+            <div class="card media">
+                <div class="icon"><img src="../assets/img/jp.png" width="100px"></div>
+                <div class="content">
+                    <h2>João Pedro da Cruz Gomes</h2>
+                    <h5 class="text-white">Desenvolvedor Fullstack</h5>
+                    <p>Atuei como fullStack da Freegunity, amante da tecnologia desde pequeno, engraçadinho do time e
+                        lindo.</p>
+                        <a href="https://www.linkedin.com/in/joaopdrocruz/" target="_blank"><img src="../../assets/img/linkedin.png" width="25px" alt="Linkedin" class="redeSocial"></a>
+                    <a href="https://github.com/jonpdro" target="_blank"><img src="../../assets/img/github.png" width="25px" alt="Github" class="redeSocial"></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md alend">
+            <div class="card media">
+                <div class="icon"><img src="../assets/img/aninha.png" width="100px">
+                </div>
+                <div class="content">
+                    <h2>Ana Beatriz Yujra Espejo</h2>
+                    <h5 class="text-white">Desenvolvedora Fullstack</h5>
+                    <p>Atuei como fullStack da Freegunity, sou bem família, amante da cultura e voluntária.</p>
+                    <a href="https://www.linkedin.com/in/ana-espejo-ba7a0715b/" target="_blank"><img src="../../assets/img/linkedin.png" width="25px" alt="Linkedin" class="redeSocial"></a>
+                    <a href="https://github.com/AnnaBia" target="_blank"><img src="../../assets/img/github.png" width="25px" alt="Github" class="redeSocial"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-between">
+        <div class="col-md alend">
+            <div class="card media mr-5">
+                <div class="icon"><img src="../assets/img/pam.png" width="100px"></div>
+                <div class="content">
+                    <h2>Pamela Paulino</h2>
+                    <h5 class="text-white">Desenvolvedora Fullstack</h5>
+                    <p>Atuei no Front-End da Freegunity, vegetariana, feminista e arteira nas horas vagas.</p>
+                    <a href="https://www.linkedin.com/in/paulinopamela/" target="_blank"><img src="../../assets/img/linkedin.png" width="25px" alt="Linkedin" class="redeSocial"></a>
+                    <a href="https://github.com/paulinopamela" target="_blank"><img src="../../assets/img/github.png" width="25px" alt="Github" class="redeSocial"></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md alend">
+            <div class="card media">
+                <div class="icon"><img src="../assets/img/maic.png" width="100px"></div>
+                <div class="content">
+                    <h2>Maicon G Cerqueira</h2>
+                    <h5 class="text-white">Desenvolvedor Fullstack</h5>
+                    <p>Atuei no Front-End da Freegunity, apaixonado por tecnologia e Afrofuturismo, baiano, pai do Logan, fã da Marvel e longboarder.</p>
+                    <a href="https://www.linkedin.com/in/maiccerqueira/" target="_blank"><img src="../../assets/img/linkedin.png" width="25px" alt="Linkedin" class="redeSocial"></a>
+                    <a href="https://github.com/maiccerqueira" target="_blank"><img src="../../assets/img/github.png" width="25px" alt="Github" class="redeSocial"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/DEV TEAM SPACE-->
+
+<!--Footer-->
+<div class="container-fluid ft">
+    <footer class="footer">
+        <div class="row d-flex justify-content-center">
+            <div class="footer-col ml">
+                <h4>Sobre FreegUnity</h4>
+                <p class="justify">Temos como propósito "diminuir" o desperdício de alimentos por meio
+                    da disseminação do
+                    consumo consciente reunindo a comunidade freegan e deixando o convite aos não freegans.</p>
+            </div>
+
+            <div class="footer-col ">
+                <h4>Geral</h4>
+                <ul class="p-0 align-items-center">
+                    <li><a href="#proposito">Propósito</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Privacidade</a></li>
+                    <li><a href="#">Termos & Condições</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Redes Sociais</h4>
+                <ul class="p-0 align-items-center">
+                    <li><a href="https://web.whatsapp.com/" target="_blank"><i class="fab fa-whatsapp"></i>
+                            WhatsApp</a>
+                    </li>
+                    <li><a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i>
+                            Instagram</a></li>
+                    <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i>
+                            Facebook</a></li>
+                    <li><a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i>
+                            Youtube</a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i>
+                            LinkedIn</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col d-flex justify-content-center">
+                <a href="#entrar">
+                    <img src="assets/img/arrow-up.png" class="seta img-fluid">
+                </a>
+            </div>
+
+        </div>
+    </footer>
+</div>
